@@ -1,0 +1,91 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>SASS Nitty grid demo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+        <link rel="stylesheet" href="demo.css">
+    </head>
+    <body>
+
+        <div class="grid-preview">
+            <div class="grid-preview__inner">
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+                <div class="grid-preview__col"></div>
+            </div>
+        </div>
+
+
+        <header class="container">
+
+            <div class="main-header">
+                <div class="main-header__inner">
+                    <h1 class="main-header__headline">SASS-Nitty - Simply grids</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12"><div class="header">grid-row;</div></div>
+                <div class="col-1"><div class="col">grid-col;</div></div>
+                <div class="col-2"><div class="col">grid-col( 2 );</div></div>
+                <div class="col-5"><div class="col">grid-col( 5 );</div></div>
+                <div class="col-1"><div class="col">grid-col;</div></div>
+                <div class="col-1"><div class="col">grid-col;</div></div>
+                <div class="col-2"><div class="col">grid-col( 2 );</div></div>
+            </div>
+
+            <div class="row-center">
+                <div class="col-12"><div class="header">grid-row( $align: center ):</div></div>
+                <div class="col-2"><div class="col">grid-col( 2 );</div></div>
+                <div class="col-5"><div class="col">grid-col( 5 );</div></div>
+                <div class="col-1"><div class="col">grid-col;</div></div>
+            </div>
+
+            <div class="row">
+                <div class="col-12"><div class="header">grid-row;</div></div>
+                <div class="col-3-prefix-suffix"><div class="col">grid-col( 3, $prefix: 1, $suffix: 2 );</div></div>
+                <div class="col-1"><div class="col">grid-col;</div></div>
+                <div class="col-2-suffix"><div class="col">grid-col( 2, $suffix: 3 );</div></div>
+                <div class="col-5"><div class="col">grid-col( 5 );</div></div>
+                <div class="col-3-prefix-suffix"><div class="col">grid-col( 3, $prefix: 1, $suffix: 2 );</div></div>
+                <div class="col-1"><div class="col">grid-col;</div></div>
+            </div>
+
+            <div class="row">
+                <div class="col-12"><div class="header">grid-row;</div></div>
+                <div class="col-10">
+                    <div class="col">grid-col(10);</div>
+                    <div class="row">
+                        <div class="col-12"><div class="header header--small">grid-row;</div></div>
+                        <div class="col-3-10"><div class="col">grid-col( 3, $of: 10 );</div></div>
+                        <div class="col-7-10"><div class="col">grid-col( 7, $of: 10 );</div></div>
+                    </div>
+                </div>
+                <div class="col-2"><div class="col">grid-col(2);</div></div>
+            </div>
+
+            <div class="row">
+                <div class="col-12"><div class="header">grid-row:</div></div>
+                <div class="col-3-align-middle"><div class="col short">grid-col( 3, $align: middle );</div></div>
+                <div class="col-3-align-middle"><div class="col tall">grid-col( 3, $align: middle );</div></div>
+                <div class="col-3"><div class="col">grid-col( 3 );</div></div>
+                <div class="col-3-align-bottom"><div class="col">grid-col( 3, $align: bottom );</div></div>
+            </div>
+
+        </header>
+
+    </body>

@@ -1,0 +1,165 @@
+$grid-tech: inline !default;
+$grid-gutter: 20px !default;
+$grid-columns: 12 !default;
+$grid-font-size: 1rem !default;
+$grid-gutter-half: $grid-gutter / 2;
+$grid-mq-margins: ( df: 16px ) !default;
+$grid-max-width: 1400px !default;
+$grid-show-preview: false !default;
+
+@mixin grid-row ( $grid-gutter: $grid-gutter-half, $align-sides: true, $tech: $grid-tech, $align: left ) {
+	padding-left: 0 !important; // Calculations are wrong if padding is present
+	padding-right: 0 !important; // Calculations are wrong if padding is present
+
+	@if ( $tech == inline ) {
+		font-size: 0 !important; // Reset font-size to prevent unwanted spacing
+		letter-spacing: 0 !important; // Letter-spacing can throw inline-blocks off
+	} @else if ( $tech == float ) {
+		&:before,
+		&:after {
+			content: ' ';
+			display: table;
+		}
+
+		&:after {
+			clear: both;
+		}
+	}
+
+	@if ( $align-sides ) {
+		margin-left: -$grid-gutter;
+		margin-right: -$grid-gutter;
+	}
+
+	text-align: $align;
+
+	// Reset alignment on children
+	@if ( $align != left ) {
+		> * {
+			text-align: left;
+		}
+	}
+
+}
+
+@mixin grid-row-full( $tech: $grid-tech ) {
+	@include grid-row( $tech: $tech, $align-sides: false );
+
+	width: 100vw;
+	margin-left: 50%;
+	transform: translate( -50%, 0 );
+}
+
+
+@mixin grid-col( $width: 1, $of: $grid-columns, $gutter-left: $grid-gutter-half, $gutter-right: $grid-gutter-half, $align: top, $tech: $grid-tech, $push: false, $prefix: false, $suffix: false ) {
+	width: percentage( $width / $of );
+	padding-left: $gutter-left;
+	padding-right: $gutter-right;
+
+	@if ( $tech == inline ) {
+		display: inline-block;
+		font-size: $grid-font-size;
+		vertical-align: $align;
+	} @else if ( $tech == float ) {
+		float: left;
+	}
+
+	@if ( $push != false ) {
+		@include grid-col-push( $of, $push );
+	}
+
+	@if ( $prefix != false ) {
+		margin-left: percentage( 1 / $of ) * $prefix;
+	}
+
+	@if ( $suffix != false ) {
+		margin-right: percentage( 1 / $of ) * $suffix;
+	}
+
+}
+
+@mixin grid-col-push( $of: $grid-columns, $push: 0 ) {
+	position: relative;
+	left: percentage( 1 / $of ) * $push;
+}
+
+@function grid-width( $width, $of: $grid-columns, $add-gutters: 0 ) {
+	$gutters: -$grid-gutter + $add-gutters * $grid-gutter;
+
+	@return calc( ( 100% + #{ $grid-gutter } ) / #{$of/$width} + #{ $gutters } );
+}
+
+
+@mixin grid-section( $center: true, $use-calc: true, $row: false, $max-width: $grid-max-width ) {
+
+	$default: map-get( $grid-mq-margins, df );
+	$breakpoints: map-remove( $grid-mq-margins, df );
+	$row-compensation: 0px;
+
+	@if ( $row ) {
+		$row-compensation: $grid-gutter-half;
+
+		font-size: 0;
+	}
+
+	@if ( $center ) {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	@if ( $use-calc ) {
+		width: calc( 100% - #{ 2 * $default - $row-compensation * 2 } );
+	} @else {
+		padding-left: $default - $row-compensation;
+		padding-right: $default - $row-compensation;
+	}
+
+	@if ( $max-width != false ) {
+		max-width: $max-width;
+	}
+
+	@each $mq, $margin in $breakpoints {
+
+		@include mq( $mq ) {
+			@if ( $use-calc ) {
+				width: calc( 100% - #{ 2 * $margin - $row-compensation * 2 } );
+			} @else {
+				padding-left: $margin - $row-compensation;
+				padding-right: $margin - $row-compensation;
+			}
+		}
+
+	}
+
+}
+
+@if( $grid-show-preview ) {
+
+	.grid-preview {
+		@include grid-section;
+
+		bottom: 0;
+		left: 50%;
+		pointer-events: none;
+		position: fixed;
+		top: 0;
+		transform: translate( -50%, 0 );
+		z-index: 9000;
+
+		&__inner {
+			@include grid-row;
+		}
+
+		&__col {
+			@include grid-col;
+
+			&:before {
+				background-color: rgba( 128, 128, 128, 0.3 );
+				content: '';
+				display: block;
+				height: 100vh;
+			}
+		}
+	}
+
+}

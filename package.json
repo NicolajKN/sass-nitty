@@ -1,0 +1,31 @@
+{
+  "name": "sass-nitty",
+  "version": "1.0.0",
+  "description": "A simple and powerful set of SASS mixins to align your layouts to any grid. ",
+  "main": "_nitty.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "demo": "node-sass demo/demo.scss demo/demo.css",
+    "demo-watch": "nodemon --watch demo/*.scss scripts/demo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicolajKN/sass-nitty.git"
+  },
+  "keywords": [
+    "sass",
+    "grid",
+    "grids",
+    "layout"
+  ],
+  "author": "Nicolaj Kirkegaard Nielsen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NicolajKN/sass-nitty/issues"
+  },
+  "homepage": "https://github.com/NicolajKN/sass-nitty#readme",
+  "devDependencies": {
+    "node-sass": "^3.12.2",
+    "nodemon": "^1.11.0"
+  }
+}

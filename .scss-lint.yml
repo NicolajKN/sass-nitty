@@ -1,0 +1,37 @@
+linters:
+    ImportantRule:
+        enabled: false
+
+    ColorVariable:
+        enabled: false
+
+    Indentation:
+        enabled: false
+
+    SpaceBetweenParens:
+        spaces: 1
+
+    QualifyingElement:
+        allow_element_with_attribute: true
+
+    SelectorFormat:
+        convention: 'hyphenated_BEM'
+
+    VendorPrefix:
+        enabled: false
+
+    MergeableSelector:
+        enabled: false
+
+    LeadingZero:
+        enabled: true
+        style: include_zero
+
+    NestingDepth:
+        enabled: false
+
+    TrailingWhitespace:
+        enabled: false
+
+    PseudoElement:
+        enabled: false

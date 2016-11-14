@@ -1,0 +1,221 @@
+.grid-preview {
+  margin-left: auto;
+  margin-right: auto;
+  width: calc( 100% - 32px);
+  max-width: 1400px;
+  bottom: 0;
+  left: 50%;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transform: translate(-50%, 0);
+  z-index: 9000; }
+  .grid-preview__inner {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    font-size: 0 !important;
+    letter-spacing: 0 !important;
+    margin-left: -10px;
+    margin-right: -10px;
+    text-align: left; }
+  .grid-preview__col {
+    width: 8.33333%;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: top; }
+    .grid-preview__col:before {
+      background-color: rgba(128, 128, 128, 0.3);
+      content: '';
+      display: block;
+      height: 100vh; }
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0; }
+
+body {
+  background-color: #fff;
+  font-family: 'Open Sans', sans-serif; }
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  width: calc( 100% - 32px);
+  max-width: 1400px; }
+
+.main-header {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+  margin-left: -10px;
+  margin-right: -10px;
+  text-align: left; }
+  .main-header__inner {
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    font-size: 1rem;
+    vertical-align: top; }
+  .main-header__headline {
+    background-color: #ddd;
+    line-height: 1;
+    padding-bottom: 40px;
+    padding-top: 40px;
+    text-align: center; }
+
+.col {
+  background-color: #c8c8ff;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+  font-weight: bold;
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 1px;
+  text-align: center; }
+
+.tall {
+  height: 70px;
+  line-height: 70px; }
+
+.short {
+  height: 30px;
+  line-height: 30px; }
+
+.row {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+  margin-left: -10px;
+  margin-right: -10px;
+  text-align: left; }
+
+.row-center {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-size: 0 !important;
+  letter-spacing: 0 !important;
+  margin-left: -10px;
+  margin-right: -10px;
+  text-align: center; }
+  .row-center > * {
+    text-align: left; }
+
+.col-1 {
+  width: 8.33333%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top; }
+
+.col-2 {
+  width: 16.66667%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top; }
+
+.col-3 {
+  width: 25%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top; }
+
+.col-3-prefix-suffix {
+  width: 25%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top;
+  margin-left: 8.33333%;
+  margin-right: 16.66667%; }
+
+.col-2-suffix {
+  width: 16.66667%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top;
+  margin-right: 25%; }
+
+.col-5 {
+  width: 41.66667%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top; }
+
+.col-10 {
+  width: 83.33333%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top; }
+
+.col-12 {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top; }
+
+.col-3-10 {
+  width: 30%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top; }
+
+.col-7-10 {
+  width: 70%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top; }
+
+.col-3-align-bottom {
+  width: 25%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: bottom; }
+
+.col-3-align-middle {
+  width: 25%;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: middle; }
+
+.header {
+  background-color: #ccc;
+  margin-top: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: center;
+  line-height: 1; }
+
+.header--small {
+  margin-top: 0px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: 13px; }

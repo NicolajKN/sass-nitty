@@ -1,0 +1,129 @@
+$grid-show-preview: true;
+
+@import '../nitty';
+
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-color: #fff;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+    @include grid-section;
+}
+
+.main-header {
+    @include grid-row;
+
+    &__inner {
+        @include grid-col( 12 );
+    }
+
+    &__headline {
+        background-color: #ddd;
+        line-height: 1;
+        padding-bottom: 40px;
+        padding-top: 40px;
+        text-align: center;
+    }
+}
+
+.col {
+    background-color: rgb( 200, 200, 255 );
+    color: rgba( 0, 0, 0, 0.5 );
+    font-size: 13px;
+    font-weight: bold;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 1px;
+    text-align: center;
+}
+
+.tall {
+    height: 70px;
+    line-height: 70px;
+}
+
+.short {
+    height: 30px;
+    line-height: 30px;
+}
+
+.row {
+    @include grid-row;
+}
+
+.row-center {
+    @include grid-row( $align: center );
+}
+
+.col-1 {
+    @include grid-col;
+}
+
+.col-2 {
+    @include grid-col( 2 );
+}
+
+.col-3 {
+    @include grid-col( 3 );
+}
+
+.col-3-prefix-suffix {
+    @include grid-col( 3, $prefix: 1, $suffix: 2 );
+}
+
+.col-2-suffix {
+    @include grid-col( 2, $suffix: 3 );
+}
+
+.col-5 {
+    @include grid-col( 5 );
+}
+
+.col-10 {
+    @include grid-col( 10 );
+}
+
+.col-12 {
+    @include grid-col( 12 );
+}
+
+.col-3-10 {
+    @include grid-col( 3, $of: 10 );
+}
+
+.col-7-10 {
+    @include grid-col( 7, $of: 10 );
+}
+
+.col-3-align-bottom {
+    @include grid-col( 3, $align: bottom );
+}
+
+.col-3-align-middle {
+    @include grid-col( 3, $align: middle );
+}
+
+.header {
+    background-color: #ccc;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    text-align: center;
+    line-height: 1;
+}
+
+.header--small {
+    margin-top: 0px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-size: 13px;
+}
