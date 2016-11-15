@@ -16,7 +16,7 @@ body {
 }
 
 .container {
-    @include grid-section;
+    @include grid-container;
 }
 
 .main-header {

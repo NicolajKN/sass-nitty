@@ -90,7 +90,7 @@ $grid-show-preview: false !default;
 }
 
 
-@mixin grid-section( $center: true, $use-calc: true, $row: false, $max-width: $grid-max-width ) {
+@mixin grid-container( $center: true, $use-calc: true, $row: false, $max-width: $grid-max-width ) {
 
 	$default: map-get( $grid-mq-margins, df );
 	$breakpoints: map-remove( $grid-mq-margins, df );
@@ -136,7 +136,7 @@ $grid-show-preview: false !default;
 @if( $grid-show-preview ) {
 
 	.grid-preview {
-		@include grid-section;
+		@include grid-container;
 
 		bottom: 0;
 		left: 50%;
