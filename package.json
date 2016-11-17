@@ -1,6 +1,6 @@
 {
   "name": "sass-nitty",
-  "version": "1.1.0",
+  "version": "0.5.0",
   "description": "A simple and powerful set of SASS mixins to align your layouts to any grid. ",
   "main": "_nitty.scss",
   "scripts": {
