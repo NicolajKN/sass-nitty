@@ -1,19 +1,87 @@
-$grid-tech: inline !default;
-$grid-gutter: 20px !default;
-$grid-columns: 12 !default;
-$grid-font-size: 1rem !default;
-$grid-gutter-half: $grid-gutter / 2;
-$grid-mq-margins: ( df: 16px ) !default;
-$grid-max-width: 1400px !default;
+/// Defines whether to render the preview css or not.
+/// The preview shows an overlay of the default columns on the page.
+///
+/// @example
+///   <!-- To see the preview, copy this into your html -->
+///   <div class="grid-preview">
+///     <div class="grid-preview__row">
+///       <div class="grid-preview__col"></div>
+///       <div class="grid-preview__col"></div>
+///       <div class="grid-preview__col"></div>
+///       <!-- ...however many columns you've defined -->
+///     </div>
+///   </div>
+/// @type Bool
 $grid-show-preview: false !default;
 
-@mixin grid-row ( $grid-gutter: $grid-gutter-half, $align-sides: true, $tech: $grid-tech, $align: left ) {
+/// Defines the default layout technique to be used.
+/// Currently two techniques are suppoerted:
+/// - **inline** layouts using `display: inline-block`
+/// - **float** layouts using `float: left`
+/// @type String
+$grid-tech: inline !default;
+
+/// Defines the default number of columns.
+/// @type Number
+$grid-columns: 12 !default;
+
+/// Defines the default gutter between columns. At the moment only `px` values are supported.
+///
+/// **For best results choose an even number because of the maths involved.**
+/// @type Number
+$grid-gutter: 20px !default;
+
+/// Defines the max-width of the grid. This is used on grid-container elements.
+/// Set to false to disable max-width
+/// @type Number | Bool
+$grid-max-width: 1400px !default;
+
+/// Defines the (optionally responsive) margins of the grid.
+/// - `df` defines the default margins.
+/// - Further keys define margins for specific breakpoints.
+///
+/// **Responsive margins require the [sass-mq mixin](https://github.com/sass-mq/sass-mq)**
+/// @example
+///   // sass-mq breakpoints
+///   $mq-breakpoints: (
+///     mobile:  320px,
+///     tablet:  740px,
+///     desktop: 980px
+///   );
+///
+///   // sass-nitty responsive margins
+///   $grid-margins: (
+///     df:      12px,
+///     mobile:  16px,
+///     tablet:  20px,
+///     desktop: 22px
+///   );
+/// @type Map
+$grid-margins: ( df: 16px ) !default;
+
+/// Defines the `font-size` to be set on column items. This is needed as part of the layout technique involves resetting the font size on rows.
+///
+/// **Just leave it alone** In 99% of cases you don't need to touch this.
+/// @type Number
+$grid-font-size: 1rem !default;
+
+$grid-gutter-half: $grid-gutter / 2;
+
+@mixin grid-row ( $gutter: $grid-gutter-half, $align-sides: true, $tech: $grid-tech, $align: left ) {
 	padding-left: 0 !important; // Calculations are wrong if padding is present
 	padding-right: 0 !important; // Calculations are wrong if padding is present
 
 	@if ( $tech == inline ) {
 		font-size: 0 !important; // Reset font-size to prevent unwanted spacing
 		letter-spacing: 0 !important; // Letter-spacing can throw inline-blocks off
+		text-align: $align;
+
+		// Reset alignment on children
+		@if ( $align != left ) {
+			> * {
+				text-align: left;
+			}
+		}
 	} @else if ( $tech == float ) {
 		&:before,
 		&:after {
@@ -29,15 +97,6 @@ $grid-show-preview: false !default;
 	@if ( $align-sides ) {
 		margin-left: -$grid-gutter;
 		margin-right: -$grid-gutter;
-	}
-
-	text-align: $align;
-
-	// Reset alignment on children
-	@if ( $align != left ) {
-		> * {
-			text-align: left;
-		}
 	}
 
 }
@@ -90,11 +149,11 @@ $grid-show-preview: false !default;
 }
 
 
-@mixin grid-container( $center: true, $use-calc: true, $row: false, $max-width: $grid-max-width ) {
+@mixin grid-container( $center: true, $row: false, $max-width: $grid-max-width ) {
 
 	$default: map-get( $grid-mq-margins, df );
 	$breakpoints: map-remove( $grid-mq-margins, df );
-	$row-compensation: 0px;
+	$row-compensation: 0;
 
 	@if ( $row ) {
 		$row-compensation: $grid-gutter-half;
@@ -107,33 +166,23 @@ $grid-show-preview: false !default;
 		margin-right: auto;
 	}
 
-	@if ( $use-calc ) {
-		width: calc( 100% - #{ 2 * $default - $row-compensation * 2 } );
-	} @else {
-		padding-left: $default - $row-compensation;
-		padding-right: $default - $row-compensation;
-	}
+	width: calc( 100% - #{ 2 * $default - $row-compensation * 2 } );
 
 	@if ( $max-width != false ) {
 		max-width: $max-width;
 	}
 
-	@each $mq, $margin in $breakpoints {
-
-		@include mq( $mq ) {
-			@if ( $use-calc ) {
+	@if mixin-exists( mq ) {
+		@each $mq, $margin in $breakpoints {
+			@include mq( $mq ) {
 				width: calc( 100% - #{ 2 * $margin - $row-compensation * 2 } );
-			} @else {
-				padding-left: $margin - $row-compensation;
-				padding-right: $margin - $row-compensation;
 			}
 		}
-
 	}
 
 }
 
-@if( $grid-show-preview ) {
+@if ( $grid-show-preview ) {
 
 	.grid-preview {
 		@include grid-container;
@@ -146,7 +195,7 @@ $grid-show-preview: false !default;
 		transform: translate( -50%, 0 );
 		z-index: 9000;
 
-		&__inner {
+		&__row {
 			@include grid-row;
 		}
 
