@@ -67,92 +67,55 @@ $grid-font-size: 1rem !default;
 
 $grid-gutter-half: $grid-gutter / 2;
 
-@mixin grid-row ( $gutter: $grid-gutter-half, $align-sides: true, $tech: $grid-tech, $align: left ) {
-	padding-left: 0 !important; // Calculations are wrong if padding is present
-	padding-right: 0 !important; // Calculations are wrong if padding is present
-
-	@if ( $tech == inline ) {
-		font-size: 0 !important; // Reset font-size to prevent unwanted spacing
-		letter-spacing: 0 !important; // Letter-spacing can throw inline-blocks off
-		text-align: $align;
-
-		// Reset alignment on children
-		@if ( $align != left ) {
-			> * {
-				text-align: left;
-			}
-		}
-	} @else if ( $tech == float ) {
-		&:before,
-		&:after {
-			content: ' ';
-			display: table;
-		}
-
-		&:after {
-			clear: both;
-		}
-	}
-
-	@if ( $align-sides ) {
-		margin-left: -$grid-gutter;
-		margin-right: -$grid-gutter;
-	}
-
-}
-
-@mixin grid-row-full( $tech: $grid-tech ) {
-	@include grid-row( $tech: $tech, $align-sides: false );
-
-	width: 100vw;
-	margin-left: 50%;
-	transform: translate( -50%, 0 );
-}
-
-
-@mixin grid-col( $width: 1, $of: $grid-columns, $gutter-left: $grid-gutter-half, $gutter-right: $grid-gutter-half, $align: top, $tech: $grid-tech, $push: false, $prefix: false, $suffix: false ) {
-	width: percentage( $width / $of );
-	padding-left: $gutter-left;
-	padding-right: $gutter-right;
-
-	@if ( $tech == inline ) {
-		display: inline-block;
-		font-size: $grid-font-size;
-		vertical-align: $align;
-	} @else if ( $tech == float ) {
-		float: left;
-	}
-
-	@if ( $push != false ) {
-		@include grid-col-push( $of, $push );
-	}
-
-	@if ( $prefix != false ) {
-		margin-left: percentage( 1 / $of ) * $prefix;
-	}
-
-	@if ( $suffix != false ) {
-		margin-right: percentage( 1 / $of ) * $suffix;
-	}
-
-}
-
-@mixin grid-col-push( $of: $grid-columns, $push: 0 ) {
-	position: relative;
-	left: percentage( 1 / $of ) * $push;
-}
-
-@function grid-width( $width, $of: $grid-columns, $add-gutters: 0 ) {
-	$gutters: -$grid-gutter + $add-gutters * $grid-gutter;
-
-	@return calc( ( 100% + #{ $grid-gutter } ) / #{$of/$width} + #{ $gutters } );
-}
-
-
+///  Define a container element.
+/// This may be a single wrapper overarching all content or several sections on the same page.
+///
+/// Centers the content, sets a `max-width` and defines the site margins.
+/// @example
+///   // Set site-wide max-width
+///   $grid-max-width: 1400px;
+/// @example
+///   // Set site-wide margin
+///   $grid-margins: ( df: 20px );
+/// @example
+///   // Set site-wide responsive margins (requires sass-mq)
+///   $grid-margins: (
+///     df:      12px,
+///     mobile:  16px,
+///     tablet:  20px,
+///     desktop: 22px
+///   );
+/// @example
+///   // Usually this will do
+///   .wrapper {
+///     @include grid-container;
+///   }
+/// @example
+///   // Custom max-width
+///   .header {
+///     @include grid-container( $max-width: 45rem );
+///   }
+/// @example
+///   // Set row to true to use container as a grid row
+///   .page-content {
+///     @include grid-container( $row: true );
+///
+///     &__sidebar {
+///       @include grid-col( 4 );
+///     }
+///
+///     &__main {
+///       @include grid-col( 8 );
+///     }
+///   }
+///
+/// @param {Bool} $center [true] - Whether to center the container
+/// @param {Bool} $row [false] - Treat container as a row element. You won't need to define a row element.
+/// @param {Number} $max-width [$grid-max-width] - Defines the max-width of the container.
 @mixin grid-container( $center: true, $row: false, $max-width: $grid-max-width ) {
 
-	$default: map-get( $grid-mq-margins, df );
-	$breakpoints: map-remove( $grid-mq-margins, df );
+	$default: map-get( $grid-margins, df );
+	$breakpoints: map-remove( $grid-margins, df );
 	$row-compensation: 0;
 
 	@if ( $row ) {
@@ -181,6 +144,118 @@ $grid-gutter-half: $grid-gutter / 2;
 	}
 
 }
+
+/// Defines a grid row
+/// @param {Number | Bool} $gutter [$grid-gutter] - Defines the gutter between columns
+/// @param {String} $tech [$grid-tech] - Defines the layout technique. One of `inline` or `float`
+/// @param {String} $align [left] - Alignment for the grid; `left`, `right` or `center`. Only applicable when `$grid-tech: inline`
+@mixin grid-row ( $gutter: $grid-gutter, $tech: $grid-tech, $align: left ) {
+	padding-left: 0 !important; // Calculations are wrong if padding is present
+	padding-right: 0 !important; // Calculations are wrong if padding is present
+
+	@if ( $tech == inline ) {
+		font-size: 0 !important; // Reset font-size to prevent unwanted spacing
+		letter-spacing: 0 !important; // Letter-spacing can throw inline-blocks off
+		text-align: $align;
+
+		// Reset alignment on children
+		@if ( $align != left ) {
+			> * {
+				text-align: left;
+			}
+		}
+	} @else if ( $tech == float ) {
+		&:before,
+		&:after {
+			content: ' ';
+			display: table;
+		}
+
+		&:after {
+			clear: both;
+		}
+	}
+
+	@if ( $gutter != false ) {
+		margin-left: -$gutter / 2;
+		margin-right: -$gutter / 2;
+	}
+
+}
+
+@mixin grid-row-full( $tech: $grid-tech ) {
+	@include grid-row( $tech: $tech, $align-sides: false );
+
+	width: 100vw;
+	margin-left: 50%;
+	transform: translate( -50%, 0 );
+}
+
+/// Defines a grid column
+/// @param {Number} $width [1] - Number of columns to span
+/// @param {Number} $of [$grid-columns] - Total number of columns
+/// @param {Number} $gutter [$grid-gutter] - Gutter between columns
+/// @param {String} $align [$top] - How to align the columns to each other. One of `top`, `bottom` and `center`.
+/// @param {Number | Bool} $push [false] - Number of columns to push or pull the column. Use for custom source order.
+/// @param {Number | Bool} $prefix [false] - Number of empty columns before this column.
+/// @param {Number | Bool} $suffix [false] - Number of empty columns after this column.
+@mixin grid-col( $width: 1, $of: $grid-columns, $gutter: $grid-gutter, $align: top, $tech: $grid-tech, $push: false, $prefix: false, $suffix: false ) {
+	width: percentage( $width / $of );
+	padding-left: $gutter / 2;
+	padding-right: $gutter / 2;
+
+	@if ( $tech == inline ) {
+		display: inline-block;
+		font-size: $grid-font-size;
+		vertical-align: $align;
+	} @else if ( $tech == float ) {
+		float: left;
+	}
+
+	@if ( $push != false ) {
+		left: percentage( 1 / $of ) * $push;
+		position: relative;
+	}
+
+	@if ( $prefix != false ) {
+		margin-left: percentage( 1 / $of ) * $prefix;
+	}
+
+	@if ( $suffix != false ) {
+		margin-right: percentage( 1 / $of ) * $suffix;
+	}
+
+}
+
+/// Calculate a width based on the grid.
+///
+/// Use for custom positioning and widths that align to the grid.
+/// Calculations are based on the parent element width.
+/// Use the `$of` parameter to define the parent base.
+///
+/// @example
+///   // Define a container
+///   .header {
+///     @include grid-container;
+///
+///     position: relative; // For absolute positioning child elements
+///   }
+///
+///   // Align an element inside .header
+///   .header__logo {
+///     position: absolute;
+///     left: grid-width( 4, $add-gutters: 1 );
+///     width: grid-width( 5 );
+///   }
+/// @param {Number} $width [1] - Number of columns to span
+/// @param {Number} $of [$grid-columns] - Total number of columns
+/// @param {Number} $add-gutters [0] - Number of gutters to add to the width.
+@function grid-width( $width: 1, $of: $grid-columns, $add-gutters: 0 ) {
+	$gutters: -$grid-gutter + $add-gutters * $grid-gutter;
+
+	@return calc( ( 100% + #{ $grid-gutter } ) / #{$of/$width} + #{ $gutters } );
+}
+
 
 @if ( $grid-show-preview ) {
 

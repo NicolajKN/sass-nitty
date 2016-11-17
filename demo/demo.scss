@@ -112,6 +112,14 @@ body {
     @include grid-col( 3, $align: middle );
 }
 
+.col-8-push {
+    @include grid-col( 8, $push: 4 );
+}
+
+.col-4-pull {
+    @include grid-col( 4, $push: -8 );
+}
+
 .header {
     background-color: #ccc;
     margin-top: 20px;
