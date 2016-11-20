@@ -1,11 +1,17 @@
-(function(){
+(function( document, window ){
     'use strict';
 
     var container;
 
+    function createEl( classes, innerHTML ) {
+        var el = document.createElement( 'DIV' );
+        el.className = classes || '';
+        el.innerHTML = innerHTML || '';
+        return el;
+    }
+
     function getNumberOfColumns() {
-        var tester = document.createElement( 'DIV' );
-        tester.className = 'grid-preview-tester';
+        var tester = createEl( 'grid-preview-tester' );
 
         document.body.appendChild( tester );
 
@@ -17,20 +23,15 @@
     }
 
     function createPreview(columns) {
-        var container = document.createElement( 'DIV' );
-        container.className = 'grid-preview is-hidden';
-
-        var row = document.createElement( 'DIV' );
-        row.className = 'grid-preview__row';
+        var container = createEl( 'grid-preview is-hidden' );
+        var row = createEl( 'grid-preview__row' );
 
         for (var i = 0; i < columns; i++) {
-            var col = document.createElement( 'DIV' );
-            col.className = 'grid-preview__col';
+            var col = createEl( 'grid-preview__col' );
             row.appendChild( col );
         }
 
         container.appendChild( row );
-
         document.body.appendChild( container );
 
         return container;
@@ -39,9 +40,7 @@
     function createPreviewToggle() {
         var showPreview = false;
 
-        var toggle = document.createElement( 'DIV' );
-        toggle.className = 'grid-preview-toggle';
-        toggle.innerHTML = 'TOGGLE GRID PREVIEW';
+        var toggle = createEl( 'grid-preview-toggle', 'TOGGLE GRID PREVIEW' );
         toggle.addEventListener( 'click', function(){
             if ( showPreview ) {
                 container.classList.add( 'is-hidden' );
@@ -63,4 +62,4 @@
         console.warn( 'Grid preview failed. Did you set the correct sass variable?' );
     }
 
-})();
+})( document, window );
