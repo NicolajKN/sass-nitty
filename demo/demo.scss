@@ -42,7 +42,11 @@ body {
     height: 50px;
     line-height: 50px;
     margin-bottom: 1px;
+    overflow: hidden;
+    padding: 0 4px;
     text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .tall {

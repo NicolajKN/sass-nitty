@@ -8,11 +8,12 @@
   max-width: 1400px;
   bottom: 0;
   left: 50%;
+  overflow: hidden;
   pointer-events: none;
   position: fixed;
   top: 0;
   transform: translate(-50%, 0);
-  transition: opacity 300ms ease-out;
+  transition: opacity 300ms ease-out, bottom 300ms ease-out;
   z-index: 9000; }
   .grid-preview__row {
     padding-left: 0 !important;
@@ -36,6 +37,7 @@
       height: 100vh; }
 
 .grid-preview.is-hidden {
+  bottom: 100%;
   opacity: 0; }
 
 .grid-preview-toggle {
@@ -100,7 +102,11 @@ body {
   height: 50px;
   line-height: 50px;
   margin-bottom: 1px;
-  text-align: center; }
+  overflow: hidden;
+  padding: 0 4px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
 
 .tall {
   height: 70px;

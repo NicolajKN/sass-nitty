@@ -268,11 +268,12 @@ $grid-gutter-half: $grid-gutter / 2;
 
 		bottom: 0;
 		left: 50%;
+		overflow: hidden;
 		pointer-events: none;
 		position: fixed;
 		top: 0;
 		transform: translate( -50%, 0 );
-		transition: opacity 300ms ease-out;
+		transition: opacity 300ms ease-out, bottom 300ms ease-out;
 		z-index: 9000;
 
 		&__row {
@@ -292,6 +293,7 @@ $grid-gutter-half: $grid-gutter / 2;
 	}
 
 	.grid-preview.is-hidden {
+		bottom: 100%;
 		opacity: 0;
 	}
 
