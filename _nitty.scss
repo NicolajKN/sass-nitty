@@ -259,6 +259,10 @@ $grid-gutter-half: $grid-gutter / 2;
 
 @if ( $grid-show-preview ) {
 
+	.grid-preview-tester {
+		content: '#{ $grid-columns }';
+	}
+
 	.grid-preview {
 		@include grid-container;
 
@@ -268,6 +272,7 @@ $grid-gutter-half: $grid-gutter / 2;
 		position: fixed;
 		top: 0;
 		transform: translate( -50%, 0 );
+		transition: opacity 300ms ease-out;
 		z-index: 9000;
 
 		&__row {
@@ -284,6 +289,28 @@ $grid-gutter-half: $grid-gutter / 2;
 				height: 100vh;
 			}
 		}
+	}
+
+	.grid-preview.is-hidden {
+		opacity: 0;
+	}
+
+	.grid-preview-toggle {
+		background-color: rgba( 0, 0, 0, 0.2 );
+		color: #000;
+		cursor: pointer;
+		font-family: Arial, sans-serif;
+		font-size: 10px;
+		opacity: 0;
+		padding: 6px 10px;
+		position: fixed;
+		right: 0;
+		top: 0;
+		transition: opacity 300ms ease-out;
+	}
+
+	.grid-preview-toggle:hover {
+	 	opacity: 1;
 	}
 
 }

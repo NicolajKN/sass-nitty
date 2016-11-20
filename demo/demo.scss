@@ -2,7 +2,6 @@ $grid-show-preview: true;
 
 @import '../nitty';
 
-
 *,
 *:before,
 *:after {
@@ -122,16 +121,16 @@ body {
 
 .header {
     background-color: #ccc;
+    line-height: 1;
     margin-top: 20px;
     padding-bottom: 10px;
     padding-top: 10px;
     text-align: center;
-    line-height: 1;
 }
 
 .header--small {
+    font-size: 13px;
     margin-top: 0px;
     padding-bottom: 5px;
     padding-top: 5px;
-    font-size: 13px;
 }
