@@ -5,10 +5,12 @@
   "main": "_nitty.scss",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "demo": "node-sass demo/demo.scss demo/demo.css",
+    "demo": "node-sass demo/demo.scss demo/demo.css && cp grid-preview.min.js demo/",
     "demo-watch": "nodemon --watch demo/*.scss scripts/demo.js",
     "js": "uglifyjs grid-preview.js -m -o grid-preview.min.js",
-    "sassdoc": "sassdoc _nitty.scss -d docs"
+    "sassdoc": "sassdoc _nitty.scss -d docs",
+    "build": "npm run demo && npm run js && npm run sassdoc",
+    "preversion": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,7 @@
   "devDependencies": {
     "node-sass": "^3.12.2",
     "nodemon": "^1.11.0",
+    "sassdoc": "^2.7.1",
     "uglify-js": "^2.7.4"
   }
 }
