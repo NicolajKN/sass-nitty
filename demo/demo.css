@@ -49,9 +49,11 @@
   opacity: 0;
   padding: 6px 10px;
   position: fixed;
+  z-index: 9999;
   right: 0;
   top: 0;
-  transition: opacity 300ms ease-out; }
+  transition: opacity 300ms ease-out;
+  user-select: none; }
 
 .grid-preview-toggle:hover {
   opacity: 1; }
