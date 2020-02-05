@@ -310,6 +310,7 @@ $grid-gutter-half: $grid-gutter / 2;
 		right: 0;
 		top: 0;
 		transition: opacity 300ms ease-out;
+		user-select: none;
 	}
 
 	.grid-preview-toggle:hover {
