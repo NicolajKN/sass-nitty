@@ -9,7 +9,7 @@
     "demo-watch": "nodemon --watch demo/*.scss scripts/demo.js",
     "js": "uglifyjs grid-preview.js -m -o grid-preview.min.js",
     "sassdoc": "sassdoc _nitty.scss -d docs",
-    "build": "npm run demo && npm run js && npm run sassdoc",
+    "build": "npm run js && npm run demo && npm run sassdoc",
     "preversion": "npm run build"
   },
   "repository": {
