@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/NicolajKN/sass-nitty/issues"
   },
-  "homepage": "https://github.com/NicolajKN/sass-nitty#readme",
+  "homepage": "https://nicolajkn.github.io/sass-nitty/",
   "devDependencies": {
     "node-sass": "^3.12.2",
     "nodemon": "^1.11.0",
