@@ -53,13 +53,18 @@
         document.body.appendChild( toggle );
     }
 
-    var columns = getNumberOfColumns();
+    function init() {
+        var columns = getNumberOfColumns();
 
-    if ( columns ) {
-        container = createPreview( columns );
-        createPreviewToggle();
-    } else {
-        console.warn( 'Grid preview failed. Did you set the correct sass variable?' );
+        if ( columns ) {
+            container = createPreview( columns );
+            createPreviewToggle();
+        } else {
+            console.warn( 'Grid preview failed. Did you set the correct sass variable?' );
+        }
     }
 
+    document.addEventListener("DOMContentLoaded", function() {
+        init();
+    });
 })( document, window );
