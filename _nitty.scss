@@ -131,7 +131,9 @@ $grid-gutter-half: $grid-gutter / 2;
 
 	width: calc( 100% - #{ 2 * $default - $row-compensation * 2 } );
 
-	@if ( $max-width != false ) {
+	@if ($row) {
+		max-width: $max-width + $row-compensation * 2;
+	} @else {
 		max-width: $max-width;
 	}
 
