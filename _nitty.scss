@@ -133,7 +133,7 @@ $grid-gutter-half: $grid-gutter / 2;
 
 	@if ($row) {
 		max-width: $max-width + $row-compensation * 2;
-	} @else {
+	} @else if ($max-width != false) {
 		max-width: $max-width;
 	}
 
