@@ -30,7 +30,7 @@
   },
   "homepage": "https://nicolajkn.github.io/sass-nitty/",
   "devDependencies": {
-    "node-sass": "^3.12.2",
+    "node-sass": "^4.13.1",
     "nodemon": "^1.11.0",
     "sassdoc": "^2.7.3",
     "standard-version": "^9.1.0",
