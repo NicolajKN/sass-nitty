@@ -31,7 +31,7 @@
   "devDependencies": {
     "node-sass": "^3.12.2",
     "nodemon": "^1.11.0",
-    "sassdoc": "^2.7.1",
+    "sassdoc": "^2.7.3",
     "uglify-js": "^2.7.4"
   }
 }
