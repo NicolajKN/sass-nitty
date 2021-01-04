@@ -12,7 +12,7 @@
     </head>
     <body>
 
-        <header class="container">
+        <section class="container">
 
             <div class="main-header">
                 <div class="main-header__inner">
@@ -74,7 +74,17 @@
                 <div class="col-4-pull"><div class="col">grid-col( 4, $push: -8 ) (second in source)</div></div>
             </div>
 
-        </header>
+        </section>
+        <section class="container-no-row">
+            <div class="col-12"><div class="header">grid-container( $row: true )</div></div>
+            <div class="col-1"><div class="col">grid-col</div></div>
+            <div class="col-2"><div class="col">grid-col( 2 )</div></div>
+            <div class="col-5"><div class="col">grid-col( 5 )</div></div>
+            <div class="col-1"><div class="col">grid-col</div></div>
+            <div class="col-1"><div class="col">grid-col</div></div>
+            <div class="col-2"><div class="col">grid-col( 2 )</div></div>
+        </section>
+
 
         <script type="text/javascript" src="grid-preview.min.js"></script>
 

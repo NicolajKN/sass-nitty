@@ -131,8 +131,8 @@ $grid-gutter-half: $grid-gutter / 2;
 
 	width: calc( 100% - #{ 2 * $default - $row-compensation * 2 } );
 
-	@if ( $max-width != false ) {
-		max-width: $max-width;
+	@if ($max-width != false) {
+		max-width: $max-width + $row-compensation * 2;
 	}
 
 	@if mixin-exists( mq ) {

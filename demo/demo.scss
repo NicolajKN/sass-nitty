@@ -18,6 +18,10 @@ body {
     @include grid-container;
 }
 
+.container-no-row {
+    @include grid-container( $row: true );
+}
+
 .main-header {
     @include grid-row;
 
