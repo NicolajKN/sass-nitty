@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 /// Defines whether to render the preview css or not.
 /// The preview shows an overlay of the default columns on the page.
 ///
@@ -65,7 +67,7 @@ $grid-margins: ( df: 16px ) !default;
 /// @type Number
 $grid-font-size: 1rem !default;
 
-$grid-gutter-half: $grid-gutter / 2;
+$grid-gutter-half: math.div($grid-gutter, 2);
 
 ///  Define a container element.
 /// This may be a single wrapper overarching all content or several sections on the same page.
@@ -177,8 +179,8 @@ $grid-gutter-half: $grid-gutter / 2;
 	}
 
 	@if ( $gutter != false ) {
-		margin-left: -$gutter / 2;
-		margin-right: -$gutter / 2;
+		margin-left: math.div(-$gutter, 2);
+		margin-right: math.div(-$gutter, 2);
 	}
 
 }
@@ -200,9 +202,9 @@ $grid-gutter-half: $grid-gutter / 2;
 /// @param {Number | Bool} $prefix [false] - Number of empty columns before this column.
 /// @param {Number | Bool} $suffix [false] - Number of empty columns after this column.
 @mixin grid-col( $width: 1, $of: $grid-columns, $gutter: $grid-gutter, $align: top, $tech: $grid-tech, $push: false, $prefix: false, $suffix: false ) {
-	width: percentage( $width / $of );
-	padding-left: $gutter / 2;
-	padding-right: $gutter / 2;
+	width: percentage(math.div($width, $of));
+	padding-left: math.div($gutter, 2);
+	padding-right: math.div($gutter, 2);
 
 	@if ( $tech == inline ) {
 		display: inline-block;
@@ -213,16 +215,16 @@ $grid-gutter-half: $grid-gutter / 2;
 	}
 
 	@if ( $push != false ) {
-		left: percentage( 1 / $of ) * $push;
+		left: percentage(math.div(1, $of)) * $push;
 		position: relative;
 	}
 
 	@if ( $prefix != false ) {
-		margin-left: percentage( 1 / $of ) * $prefix;
+		margin-left: percentage(math.div(1, $of)) * $prefix;
 	}
 
 	@if ( $suffix != false ) {
-		margin-right: percentage( 1 / $of ) * $suffix;
+		margin-right: percentage(math.div(1, $of)) * $suffix;
 	}
 
 }
